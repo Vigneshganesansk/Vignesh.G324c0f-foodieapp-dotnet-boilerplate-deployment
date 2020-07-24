@@ -1,0 +1,51 @@
+version: '3'
+services:
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment: 
+      - SA_PASSWORD=Pa55word2019
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    expose:
+      - 1433
+    volumes:
+     - ./data/:/scripts/
+    command:
+      - /bin/bash
+      - -c 
+      - |
+        # Launch MSSQL and send to background
+        /opt/mssql/bin/sqlservr &
+        # Wait 30 seconds for it to be available
+        # (lame, I know, but there's no nc available to start prodding network ports)
+        sleep 30
+        # Run every script in /scripts
+        # TODO set a flag so that this is only done once on creation, 
+        #      and not every time the container runs
+        for foo in /scripts/*.sql
+          do /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i $$foo
+        done
+        # So that the container doesn't shut down, sleep this thread
+        sleep infinity
+  server-api:
+    container_name: server-api
+    build: ./server/Server.API
+    ports:
+      - "8083:80"
+    depends_on:
+      - ms-sql-server
+    links:
+      - ms-sql-server:db
+    environment:
+      - WAIT_HOSTS=ms-sql-server:1433
+      - WAIT_HOSTS_TIMEOUT=1000
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=50
+  frontend-ui:
+    container_name: frontend-ui
+    build: ./frontend
+    ports:
+      - "4201:4200"
+    depends_on:
+      - server-api

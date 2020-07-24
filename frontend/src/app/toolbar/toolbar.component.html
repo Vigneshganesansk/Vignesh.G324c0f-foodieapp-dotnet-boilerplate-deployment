@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="">Foodie</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a id="searchTitle" class="nav-link" routerLink="/search">Search <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a id="favTitle" class="nav-link" routerLink="/favourite">Favourite <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <button id="logoutBtn" *ngIf="isLoggedIn" class="btn btn-primary" (click) = "logout()">Logout</button>
+      <form *ngIf="!isLoggedIn" #loginForm = "ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input id="username" class="form-control mr-sm-2" type="text" required name="Username" placeholder="Username" [(ngModel)]="model.Username"/>
+        <input id="password" class="form-control mr-sm-2" type="password" required name="Password" placeholder="Password" [(ngModel)]="model.Password"/>
+        <button id="loginbtn" [disabled]="!loginForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+    </div>
+  </nav>
+  
+ 

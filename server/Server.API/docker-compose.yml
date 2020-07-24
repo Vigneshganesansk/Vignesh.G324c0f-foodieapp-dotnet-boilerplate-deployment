@@ -1,0 +1,14 @@
+version: '3'
+services:
+  server-api:
+    build: .
+    ports: 
+      - "8083:80"
+    depends_on:
+      - ms-sql-server
+  ms-sql-server:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: foodie.db
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55word2019"

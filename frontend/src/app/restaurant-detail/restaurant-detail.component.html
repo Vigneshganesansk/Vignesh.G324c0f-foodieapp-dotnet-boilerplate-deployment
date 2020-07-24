@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" *ngIf="selectedRestaurant!=null">
+            <div class="col-auto mb-3">
+              <p class="card-text">Restaurant Name:</p> 
+            </div>
+            <div class="col-auto mb-3">
+                <p class="card-text">{{ selectedRestaurant.restaurant.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto mb-3">
+              <p class="card-text">Cuisines:</p> 
+            </div>
+            <div class="col-auto mb-3">
+                <p class="card-text">{{ selectedRestaurant.restaurant.cuisines }}</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="selectedRestaurant!=null">
+          <div class="col-auto mb-3">
+            <p class="card-text">Address :</p> 
+          </div>
+          <div class="col-auto mb-3">
+              <p class="card-text">{{ selectedRestaurant.restaurant.location.address }}</p>
+          </div>
+        </div>
+        <div class="row" *ngIf="selectedRestaurant!=null">
+          <div class="col-auto mb-3">
+            <p class="card-text">City :</p> 
+          </div>
+          <div class="col-auto mb-3">
+              <p class="card-text">{{ selectedRestaurant.restaurant.location.city }}</p>
+          </div>
+        </div>
+        <div class="row" *ngIf="selectedRestaurant!=null">
+          <div class="col-auto mb-3">
+            <p class="card-text">Average cost for two :</p> 
+          </div>
+          <div class="col-auto mb-3">
+              <p class="card-text">{{ selectedRestaurant.restaurant.average_cost_for_two }}</p>
+          </div>
+        </div>
+        <div class="row" *ngIf="selectedRestaurant!=null">
+          <div class="col-auto mb-3">
+            <p class="card-text">Average rating :</p> 
+          </div>
+          <div class="col-auto mb-3">
+              <p class="card-text">{{ selectedRestaurant.restaurant.user_rating.aggregate_rating }}</p>
+          </div>
+        </div>
+        <div class="row" *ngIf="selectedRestaurant!=null">
+          <div class="col-auto mb-3">
+            <p class="card-text">Votes :</p> 
+          </div>
+          <div class="col-auto mb-3">
+              <p class="card-text">{{ selectedRestaurant.restaurant.user_rating.votes }}</p>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-3">
+            <label>Comments</label>
+          </div>
+          <div class="col-sm-3">
+            <label>By</label>
+          </div>
+        </div>
+        <div class="row" *ngFor="let comment of comments; let i = index">
+            <div class="col-auto" id="comments">
+              <input type="text" [(ngModel)]="comment.description">
+            <label>{{comment.username }}</label>
+            </div>
+            <div class="col-auto">
+              <button [disabled]="comment.username !== this.userNmae" class="btn btn-danger"(click)="removeComment(i)">-</button>
+            </div>
+        </div> -->
+        <div class="row">
+          <table>
+            <tr *ngIf="this.comments.length > 0">
+              <th>Comments</th>
+              <th>By</th>
+            </tr>
+            <tr *ngFor="let comment of comments; let i = index">
+                <td><input type="text" [(ngModel)]="comment.description"></td>
+                <td><label>{{comment.username }}</label></td>
+                <td><button [disabled]="comment.username !== this.userNmae" class="btn btn-danger"(click)="removeComment(i)">-</button></td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="row">
+            <div class="col-auto mb-3">
+              <button class="btn btn-primary" (click)=addComment()>Add Comment</button>
+            </div>
+            <div class="col-auto mb-3">
+              <button class="btn btn-success" (click)="saveChanges()">Save</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

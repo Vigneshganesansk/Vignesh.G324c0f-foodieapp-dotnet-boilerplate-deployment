@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row" id="result">
+    <div class="col-sm-3" *ngFor="let restaurant of favouriteRestaurants;let i = index">
+        <div class="card">
+           <div class="card-body">
+             <h5 class="card-title">{{ restaurant.restaurant.name}}</h5>
+             <img *ngIf="this.restaurant.restaurant.thumb!=''" [src]="restaurant.restaurant.thumb" alt="">
+            <img *ngIf="this.restaurant.restaurant.thumb===''" src="../assets/noimage.png" alt="">
+             <p class="card-text">Address: {{ restaurant.restaurant.location.address}}</p>
+              <p class="card-text">City: {{ restaurant.restaurant.location.city}}</p>
+              <p class="card-text">Cuisines: {{ restaurant.restaurant.cuisines}}</p>
+              <p class="card-text">Average cost for two: {{ restaurant.restaurant.average_cost_for_two}}</p>
+           </div>
+           <div class="card-footer">
+              <button class="btn btn-danger"(click)="removeFavourite(i)">Remove Favourite</button>
+          </div>
+         </div>
+    </div>
+  </div>
+</div>

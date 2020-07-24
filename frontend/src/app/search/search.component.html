@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row" id="search">
+        <input class="form-control my-2 mx-2 col-md-3" [(ngModel)]="location" type="search" placeholder="Location" aria-label="Search">
+        <input class="form-control my-2 mx-2 col-md-3" [(ngModel)]="cuisine" type="search" placeholder="Cuisine" aria-label="Search">
+        <button class="btn btn-outline-success my-2 mx-2 col-md-3" (click)="searchFunc()">Search</button>
+  </div>
+  <div class="row" id="result">
+    <div class="col-sm-3" *ngFor="let restaurant of searchRestaurants; let i =index">
+        <div class="card" >
+           <div class="card-body">
+            <h5 class="card-title"  routerLink="/restaurant-detail" (click)="selectedCard(i)"><button class="btn btn-primary">{{ restaurant.restaurant.name}}</button></h5>
+            <img *ngIf="this.restaurant.restaurant.thumb!=''" [src]="restaurant.restaurant.thumb" alt="">
+            <img *ngIf="this.restaurant.restaurant.thumb===''" src="../assets/noimage.png" alt="">
+            <p class="card-text">Address: {{ restaurant.restaurant.location.address}}</p>
+            <p class="card-text">City: {{ restaurant.restaurant.location.city}}</p>
+           </div>
+           <div class="card-footer">
+            <a class="btn btn-primary" *ngIf="!(restaurant.restaurant.is_favourite)" (click)="setFavourite(i)">Add Favourite</a>
+            <a class="btn btn-danger" *ngIf="(restaurant.restaurant.is_favourite)" (click)="removeFavourite(i)">Remove Favourite</a>
+        </div>
+         </div>
+    </div>
+  </div>
+</div>

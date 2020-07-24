@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3" *ngFor = "let restaurant of restaurants; let i=index">
+        <div class="col-sm-12">
+          <div class="card" >
+         
+            <!-- <div class="card" style="width: 18rem;" (click)="selectedCard(i)"> -->
+              <div class="card-body">
+                <h5 class="card-title"  routerLink="/restaurant-detail" (click)="selectedCard(i)"><button class="btn btn-primary">{{ restaurant.restaurant.name}}</button></h5>
+                <img *ngIf="this.restaurant.restaurant.thumb!=''" [src]="restaurant.restaurant.thumb" alt="">
+                <img *ngIf="this.restaurant.restaurant.thumb===''" src="../assets/noimage.png" alt="">
+                <p class="card-text">Address: {{ restaurant.restaurant.location.address}}</p>
+                <p class="card-text">City: {{ restaurant.restaurant.location.city}}</p>
+                <!-- <p class="card-text">Cuisines: {{ restaurant.restaurant.cuisines}}</p>
+                <p class="card-text">Average cost for two: {{ restaurant.restaurant.average_cost_for_two}}</p>
+                <p class="card-text">Average rating: {{ restaurant.restaurant.user_rating.aggregate_rating }}</p>
+                <p class="card-text">Votes: {{ restaurant.restaurant.user_rating.votes }}</p> -->
+                
+              </div>
+              <div class="card-footer">
+                  <a class="btn btn-primary" *ngIf="!(restaurant.restaurant.is_favourite)" (click)="setFavourite(i)">Add Favourite</a>
+                  <a class="btn btn-danger" *ngIf="(restaurant.restaurant.is_favourite)" (click)="removeFavourite(i)">Remove Favourite</a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div> 
+</div>
+    

@@ -1,0 +1,6 @@
+version: '3'
+services:
+  server-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings:DefaultConnection=Server=ms-sql-server; Database=FoodieDb;  Trusted_Connection=False; User Id=sa; Password=Pa55word2019
